@@ -32,12 +32,11 @@ public class listProduct extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		Collection<AuctionItem> lst = aus.getAllAuctionItems();
-//		
-//		request.setAttribute("listItem", lst);
-//		
-//		Collection<AuctionItem> auctionItems = AuctionDatabase.getInstance().getAllAuctionItems();
-//		request.setAttribute("listItem", auctionItems);
+		Collection<AuctionItem> lst = AuctionDatabase.getInstance().getAllAuctionItems();
+		
+		request.setAttribute("listItem", lst);
+		
+		request.getRequestDispatcher("listItem.jsp").forward(request, response);
 	}
 
 	/**

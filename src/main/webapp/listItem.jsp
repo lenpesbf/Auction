@@ -13,13 +13,6 @@
 </head>
 <body>
 
-	<%
-	response.setContentType("text/html; charset=UTF-8");
-	Collection<AuctionItem> auctionItems = AuctionDatabase.getInstance().getAllAuctionItems();
-	request.setAttribute("listItem", auctionItems);
-	
-	
-	%>
 	<h3>Xin chào ${user.username}</h3>
 	<table border="1">
 		<thead>
@@ -35,7 +28,7 @@
 					<!-- Cột Mặt hàng: Miêu tả -->
 					
 					<td>
-					 <a href="showTopic.jsp?itemId=${item.id}">${item.description}</a>
+					 <a href="showTopic?itemId=${item.id}">${item.description}</a>
 					</td>
 					
 					

@@ -73,7 +73,7 @@ public class setPrice extends HttpServlet {
             if (bidPrice >= minValidBid) {
                 // Nếu hợp lệ, thực hiện đặt giá
                 auctionItem.bid(user, bidPrice);
-                response.sendRedirect("listItem.jsp"); // Redirect về danh sách đấu giá
+                response.sendRedirect("listProduct"); // Redirect về danh sách đấu giá
             } else {
                 response.sendError(400, "Bid price is too low");
             }

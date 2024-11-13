@@ -58,17 +58,10 @@ input[type="text"] {
 </style>
 </head>
 <body>
-	<%
-	String itemIdParam = request.getParameter("itemId");
-	Long itemId = Long.parseLong(itemIdParam);
-
-	// Fetch the auction item by ID
-	AuctionItem item = AuctionDatabase.getInstance().getAuctionItem(itemId);
-	session.setAttribute("item", item);
-	%>
+	
 	<h3>
 		Xin chào <span style="color: blue;">${sessionScope.user.username}</span>
-		| <a href="login.jsp">Thoát</a>
+		| <a href="login">Thoát</a>
 	</h3>
 
 	<h2>${item.description}</h2>
@@ -135,7 +128,7 @@ input[type="text"] {
 		</tbody>
 	</table>
 
-	<a href="listItem.jsp?username=${username}"
+	<a href="listProduct"
 		style="color: blue; margin-top: 10px;">Danh sách đấu giá</a>
 </body>
 </html>

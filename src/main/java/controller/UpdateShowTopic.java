@@ -1,29 +1,27 @@
 package controller;
 
 import jakarta.servlet.ServletException;
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.User;
+import model.AuctionItem;
 import service.AuctionDatabase;
-import service.AuctionService;
 
 import java.io.IOException;
 
 /**
- * Servlet implementation class login
+ * Servlet implementation class UpdateShowTopic
  */
-@WebServlet("/login")
-public class login extends HttpServlet {
+@WebServlet("/showTopic")
+public class UpdateShowTopic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public login() {
+    public UpdateShowTopic() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +31,12 @@ public class login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		String itemIdParam = request.getParameter("itemId");
+		Long itemId = Long.parseLong(itemIdParam);
+		HttpSession session = request.getSession();
+		AuctionItem item = AuctionDatabase.getInstance().getAuctionItem(itemId);
+		session.setAttribute("item", item);
+		request.getRequestDispatcher("showTopic.jsp").forward(request, response);
 	}
 
 	/**
@@ -41,19 +44,7 @@ public class login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-
-		User user =AuctionDatabase.getInstance().authenticateUser(username, password);
-
-		if (user != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			response.sendRedirect("listProduct");
-		} else {
-			request.setAttribute("errorMessage", "Tài khoản đăng nhập không chính xác");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
+		doGet(request, response);
 	}
 
 }
